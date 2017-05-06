@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Navigator
+  Navigator,
+  Image
 } from 'react-native';
 
 export default class App extends Component {

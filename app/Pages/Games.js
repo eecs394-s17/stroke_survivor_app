@@ -13,7 +13,10 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Image,
+  PanResponder,
+  Animated
 } from 'react-native';
 
 
@@ -58,7 +61,12 @@ export class Rectangle extends Component {
 export class Ball extends Component {
   render() {
     return (
-      <View style={styles.ball} />
+        <View>
+          <Image
+            style={styles.ball}
+            source={require('../Assets/red-ball.png')}
+          />
+        </View>
     )
   }
 };
