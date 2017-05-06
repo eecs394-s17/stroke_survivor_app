@@ -16,11 +16,15 @@ export default class Game extends Component {
       ballPosition: this.body.body.position,
       ballAngle: this.body.body.angle,
     });
+    Matter.Body.setVelocity(this.body.body, {x:1, y:0});
+    Matter.Body.setAngularVelocity(this.body.body, 0.1);
+
   }
 
   physicsInit = (engine) => {
 
     const dimensions = Dimensions.get('window');
+
 
     const ground = Matter.Bodies.rectangle(
       dimensions.width / 2, dimensions.height + 5,
@@ -59,6 +63,7 @@ export default class Game extends Component {
 
   constructor(props) {
     super(props);
+
 
     this.state = {
       gravity: 1,
@@ -99,6 +104,12 @@ export default class Game extends Component {
         this.setState({
           gravity: 1,
         });
+
+        Matter.Events.on(engine, 'collisionActive', function(){
+          console.log('testing');
+        });
+
+        console.log(engine);
 
         Matter.Body.applyForce(this.body.body, {
           x: this.body.body.position.x,
