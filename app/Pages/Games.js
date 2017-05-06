@@ -22,17 +22,25 @@ export default class Game extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native! Chankyu Oh!!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
         <Rectangle></Rectangle>
+        <Text style={styles.welcome}>
+          Welcome!
+          {"\n"}
+          Get ready to play Lucky Red
+        </Text>
+        <Text style={styles.instructions}>
+          To get started, click on the red ball.
+          {"\n"}
+          {"\n"}
+        </Text>
+        <Text style={styles.instructions}>
+          If it hits the top rectangle, you win!
+          {'\n'}
+          If it hits the bottom, you lose!
+          {"\n"}
+          {"\n"}
+          {"\n"}
+        </Text>
         <Ball></Ball>
       </View>
     );
@@ -84,4 +92,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   }
 })
-
