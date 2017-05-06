@@ -1,0 +1,22 @@
+dependencies: \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/RCTTabBar.m \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/RCTTabBar.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/RCTTabBarItem.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/RCTComponent.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/RCTView.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/RCTViewControllerProtocol.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/RCTWrapperViewController.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/React/Views/UIView+React.h

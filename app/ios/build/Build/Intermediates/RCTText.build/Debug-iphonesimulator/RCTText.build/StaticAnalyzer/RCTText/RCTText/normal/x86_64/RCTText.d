@@ -1,0 +1,21 @@
+dependencies: \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/Libraries/Text/RCTText.m \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/Libraries/Text/RCTText.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/UIView+React.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
+  /Users/robertjin/stroke_survivor_app/app/node_modules/react-native/Libraries/Text/RCTShadowText.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/robertjin/stroke_survivor_app/app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h
