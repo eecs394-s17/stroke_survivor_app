@@ -1,13 +1,18 @@
-import { AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    PanResponder,
-    Animated} from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  Image, // we want to use an image
+  PanResponder, // we want to bring in the PanResponder system
+  Animated // we wil be using animated value
+} from 'react-native';
 import {Component} from 'react';
-import App from './Main';
-import Game from './Pages/Games';
+
+//import App from './Main';
+//import Game from './Pages/Games';
 
 
 class stroke_survivor_app extends Component {
@@ -65,15 +70,27 @@ class stroke_survivor_app extends Component {
     let imageStyle = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
 
     return (
-      <View style={styles.container}>
+        <View style={styles.container}>
         <Animated.View style={imageStyle} {...this._panResponder.panHandlers}>
-          <Image source={require('./Assets/red-ball.png')} />
+          <Image
+            style={styles.ball}
+            source={require('./Assets/red-ball.png')} />
         </Animated.View>
       </View>
+      //<View>
+        //<Animated.View
+        //    style={imageStyle} {...this._panResponder.panHandlers}>
+          //<Image
+            //style={styles.container}
+            //source={require('./Assets/red-ball.png')}
+          ///>
+        //</Animated.View>
+      //</View>
     );
   }
 
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -87,6 +104,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
+  ball: {
+    width: 100,
+    height: 100,
+    borderRadius: 100/2,
+    backgroundColor: 'red'
+  },
   instructions: {
     textAlign: 'center',
     color: '#333333',
@@ -94,4 +117,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('app', () => Game);
+AppRegistry.registerComponent('app', () => stroke_survivor_app);
