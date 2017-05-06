@@ -1,31 +1,53 @@
 import React, { Component } from 'react';
+import { Accelerometer, Gyroscope } from 'react-native-sensors';
+import { Loop, Stage, World } from 'react-game-kit/native';
 
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View,
-  Navigator
+  View
 } from 'react-native';
 
 export default class App extends Component {
 
+  constructor(props) {
+    super(props);
+    // const accelerationObservable = new Accelerometer({
+    //   handle: 'Accelerometers',
+    //   updateInterval: 100,
+    // });
+  }
+
   render() {
 
+    const accelerationObservable = new Accelerometer({
+       updateInterval: 100,
+    });
+
+    console.log('Initialized accelerometer!');
+    accelerationObservable
+      .map(({ x, y, z }) => x )
+      .filter(speed => speed > 5)
+      .subscribe(speed => console.log(`You moved your phone with ${speed}`));
+
+    setTimeout(() => {
+      accelerationObservable.stop();
+    }, 100000);
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Hello Stroke Survivor!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, click on the games tab.
-        </Text>
-        <Text style={styles.instructions}>
-         Good luck!
-        </Text>
-      </View>
-    );
+      <Text>
+        Hello, world!
+      </Text>
+      //   <Loop>
+      //     <Stage>
+        //
+      //     </Stage>
+      //   </Loop>
+      );
+      
   }
+
 }
 
 const styles = StyleSheet.create({

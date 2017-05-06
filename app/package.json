@@ -9,6 +9,7 @@
   "dependencies": {
     "phaser": "^2.6.2",
     "react": "16.0.0-alpha.6",
+    "react-game-kit": "0.0.2",
     "react-native": "0.44.0",
     "react-native-sensors": "^2.3.0"
   },
