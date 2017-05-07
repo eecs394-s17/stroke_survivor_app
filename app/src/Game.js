@@ -154,9 +154,7 @@ export default class Game extends Component {
       ],
     };
   }
-  _onPressButton(){
-        console.log("TEST)");
-      }
+
   render() {
     
     
