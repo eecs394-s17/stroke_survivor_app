@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
 import { Accelerometer, Gyroscope } from 'react-native-sensors';
 import { Loop, Stage, World } from 'react-game-kit/native';
-
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  DeviceEventEmitter,
 } from 'react-native';
 
+var mSensorManager = require('NativeModules').SensorManager;
+
+DeviceEventEmitter.addListener('Gyroscope', function (data) {
+  /**
+  * data.x
+  * data.y
+  * data.z
+  **/
+});
+mSensorManager.startGyroscope(100);
+mSensorManager.stopGyroscope();
+
+mSensorManager.startOrientation(100);
+DeviceEventEmitter.addListener('Orientation', function (data) {
+  /**
+  * data.azimuth
+  * data.pitch
+  * data.roll
+  **/
+});
+mSensorManager.stopOrientation();
 
 
 export default class App extends Component {
