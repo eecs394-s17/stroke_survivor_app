@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Dimensions, PanResponder, View } from 'react-native';
+import { Image, Dimensions, PanResponder, View, TouchableHighlight, Text } from 'react-native';
 import {
   Body,
   Loop,
@@ -18,21 +18,22 @@ export default class Game extends Component {
       ballAngle: this.body.body.angle,
     });
 
-    Matter.Body.applyForce(this.body.body, {x:this.body.body.position.x,  y:this.body.body.position.y}, {x:this.state.direction*0.0075, y:0});
+    Matter.Body.applyForce(this.body.body, {x:this.body.body.position.x,  y:this.body.body.position.y}, {x:this.state.direction*0.0075, y: 0});
     Matter.Body.setAngularVelocity(this.body.body, this.state.direction*0.1);
 
+    console.log(this.body.body.velocity);
   }
 
   handleCollision = (events) => {
 
     // console.log(events.pairs);
     for (var i = 0; i < events.pairs.length; i++){
-      console.log(events.pairs[i].id);
+      // console.log(events.pairs[i].id);
       if (events.pairs[i].id === "1_5" || events.pairs[i].id === "1_4")
       { 
       // 1_5 and 1_4 refer to pairs of bodies with ids 1,5 and 1,4, respectively. The ball has an id of 1, the right wall has an id of 5, the left wall has an id of 4
         this.setState({direction: -1*this.state.direction});
-        console.log("changing direction");
+        // console.log("changing direction");
       }
 
     }
@@ -99,46 +100,45 @@ export default class Game extends Component {
 
   componentWillMount() {
 
-    // this._panResponder = PanResponder.create({
-    //   onStartShouldSetPanResponder: (evt, gestureState) => true,
-    //   onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-    //   onMoveShouldSetPanResponder: (evt, gestureState) => true,
-    //   onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-    //   onPanResponderGrant: (evt, gestureState) => {
-    //     this.setState({
-    //       gravity: 0,
-    //     });
+    this._panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onPanResponderGrant: (evt, gestureState) => {
+        
+        // Matter.Body.applyForce(this.body.body, {x: this.body.body.position.x, y: this.body.body.position.y}, {x:0, y:12.5});
+        Matter.Body.setPosition(this.body.body, {x:this.body.body.position.x, y:this.body.body.position.y+50});
+        // Matter.Body.setVelocity(this.body.body, {x: 0, y: -9.8});
 
-    //     Matter.Body.setAngularVelocity(this.body.body, 0);
-    //     Matter.Body.setVelocity(this.body.body, {x: 0, y: 0});
-
-    //     this.startPosition = {
-    //       x: this.body.body.position.x,
-    //       y: this.body.body.position.y,
-    //     }
-    //   },
-    //   onPanResponderMove: (evt, gestureState) => {
-    //     Matter.Body.setPosition(this.body.body, {
-    //       x: this.startPosition.x + gestureState.dx,
-    //       y: this.startPosition.y + gestureState.dy,
-    //     });
-    //   },
-    //   onPanResponderRelease: (evt, gestureState) => {
-    //     this.setState({
-    //       gravity: 1,
-    //     });
-
+        // this.startPosition = {
+        //   x: this.body.body.position.x,
+        //   y: this.body.body.position.y,
+        // }
+      },
+      // onPanResponderMove: (evt, gestureState) => {
+      //   Matter.Body.setPosition(this.body.body, {
+      //     x: this.startPosition.x + gestureState.dx,
+      //     y: this.startPosition.y + gestureState.dy,
+      //   });
+      // },
+      onPanResponderRelease: (evt, gestureState) => {
+        this.setState({
+          gravity: 1,
+        })
+      }
 
 
-    //     // Matter.Body.applyForce(this.body.body, {
-    //     //   x: this.body.body.position.x,
-    //     //   y: this.body.body.position.y,
-    //     // }, {
-    //     //   x: gestureState.vx,
-    //     //   y: gestureState.vy,
-    //     // });
-    //   },
-    // });
+
+      //   // Matter.Body.applyForce(this.body.body, {
+      //   //   x: this.body.body.position.x,
+      //   //   y: this.body.body.position.y,
+      //   // }, {
+      //   //   x: gestureState.vx,
+      //   //   y: gestureState.vy,
+      //   // });
+      // },
+    });
 
   }
 
@@ -154,21 +154,28 @@ export default class Game extends Component {
       ],
     };
   }
-
+  _onPressButton(){
+        console.log("TEST)");
+      }
   render() {
+    
+    
     const dimensions = Dimensions.get('window');
+
     return (
       <Loop>
         <Stage
           width={dimensions.width}
           height={dimensions.height}
           style={{ backgroundColor: '#3a9bdc' }}
+
         >
           <World
             onInit={this.physicsInit}
             onUpdate={this.handleUpdate}
             onCollision={this.handleCollision}
             gravity={{ x: 0, y: this.state.gravity, scale: 0.001 }}
+            
           >
             <Body
               shape="circle"
@@ -180,14 +187,13 @@ export default class Game extends Component {
               ref={(b) => { this.body = b; }}
             >
               <View
-                style={this.getBallStyles()} //{...this._panResponder.panHandlers}
+                style={this.getBallStyles()} {...this._panResponder.panHandlers}
               >
-                <Image
+                <Image onPress={this._onPressButton}
                   source={require('./assets/basketball.png')}
                   height={75}
                   width = {75}
                 />
-
               </View>
             </Body>
           </World>
@@ -196,3 +202,5 @@ export default class Game extends Component {
     );
   }
 }
+
+
