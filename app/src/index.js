@@ -13,9 +13,6 @@ export default class Game extends Component {
 
   handleUpdate = () => {
 
-
-
-
     this.setState({
       ballPosition: this.body.body.position,
       ballAngle: this.body.body.angle,
@@ -39,6 +36,7 @@ export default class Game extends Component {
       }
 
     }
+
 
   }
 
@@ -141,6 +139,7 @@ export default class Game extends Component {
     //     // });
     //   },
     // });
+
   }
 
   getBallStyles() {
