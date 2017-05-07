@@ -12,11 +12,45 @@ import Matter from 'matter-js';
 export default class Game extends Component {
 
   handleUpdate = () => {
-    this.setState({
-      ballPosition: this.body.body.position,
-      ballAngle: this.body.body.angle,
-    });
-    Matter.Body.setVelocity(this.body.body, {x:1, y:0});
+    // voodoo boolean magic to detect wall collision.
+    let direction = 2;
+    if (this.body.body.position.x >= Dimensions.get('window').width-85) {
+      direction *= -1;
+      this.setState({
+        ballPosition: this.body.body.position,
+        ballAngle: this.body.body.angle,
+        rightHit: true,
+      });
+    }
+    else if (this.body.body.position.x <= 5) {
+      direction = 2;
+      this.setState({
+        ballPosition: this.body.body.position,
+        ballAngle: this.body.body.angle,
+        rightHit: false,
+      });
+    }
+    else if (this.state.rightHit){
+      direction *= -1;
+      this.setState({
+        ballPosition: this.body.body.position,
+        ballAngle: this.body.body.angle,
+        rightHit: true,
+      });
+    }
+    else {
+      this.setState({
+        ballPosition: this.body.body.position,
+        ballAngle: this.body.body.angle,
+        rightHit: false,
+      });
+    }
+    //console.log(Dimensions.get('window').width);
+
+    console.log("DIRECTION IS: " + direction);
+    Matter.Body.setVelocity(this.body.body, {x:direction, y:0});
+
+
     Matter.Body.setAngularVelocity(this.body.body, 0.1);
 
   }
@@ -105,11 +139,6 @@ export default class Game extends Component {
           gravity: 1,
         });
 
-        Matter.Events.on(engine, 'collisionActive', function(){
-          console.log('testing');
-        });
-
-        console.log(engine);
 
         Matter.Body.applyForce(this.body.body, {
           x: this.body.body.position.x,
