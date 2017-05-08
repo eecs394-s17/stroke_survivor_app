@@ -111,12 +111,14 @@ export default class Game extends Component {
         //                    translate
         //                    reset velocities
         //Matter.Body.translate(this.body.body, {x:0,y:50});
-        Matter.Body.setPosition(this.body.body, {x: 100, y: 100});
+        // Matter.Body.setPosition(this.body.body, {x: 0, y: 50});
+
+        Matter.Body.applyForce(this.body.body, {x: this.body.body.position.x, y: this.body.body.position.y}, {x:0, y:-5});
+
+
         console.log("matter body is ", Matter.Body)
 
-        // Matter.Body.applyForce(this.body.body, {x: this.body.body.position.x, y: this.body.body.position.y}, {x:0, y:12.5});
-        // console.log("new position is ", this.body.body.position.y)
-        // Matter.Body.setVelocity(this.body.body, {x: 0, y: -9.8});
+  
 
         // this.startPosition = {
         //   x: this.body.body.position.x,
@@ -130,9 +132,13 @@ export default class Game extends Component {
       //   });
       // },
       onPanResponderRelease: (evt, gestureState) => {
-        this.setState({
-          gravity: 1,
-        })
+        // this.setState({
+        //   gravity: 1,
+        // })
+        // Matter.Body.setAngle(this.body.body, )
+        Matter.Body.applyForce(this.body.body, {x: this.body.body.position.x, y: this.body.body.position.y}, {x:0, y:5});
+        console.log("new position is ", this.body.body.position.y)
+        Matter.Body.setVelocity(this.body.body, {x: 0, y: -9.8});
 
       }
 
