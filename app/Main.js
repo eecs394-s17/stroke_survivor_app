@@ -12,22 +12,22 @@ import {
 var mSensorManager = require('NativeModules').SensorManager;
 
 DeviceEventEmitter.addListener('Gyroscope', function (data) {
-  /**
-  * data.x
-  * data.y
-  * data.z
-  **/
+
+  data.x
+  data.y
+  data.z
+
 });
 mSensorManager.startGyroscope(100);
 mSensorManager.stopGyroscope();
 
 mSensorManager.startOrientation(100);
 DeviceEventEmitter.addListener('Orientation', function (data) {
-  /**
-  * data.azimuth
-  * data.pitch
-  * data.roll
-  **/
+
+  data.azimuth
+  data.pitch
+  data.roll
+
 });
 mSensorManager.stopOrientation();
 
@@ -36,10 +36,10 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
-    // const accelerationObservable = new Accelerometer({
-    //   handle: 'Accelerometers',
-    //   updateInterval: 100,
-    // });
+     const accelerationObservable = new Accelerometer({
+       handle: 'Accelerometers',
+       updateInterval: 100,
+     });
   }
 
   calculate_rp(x, y, z) {
