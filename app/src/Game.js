@@ -106,8 +106,13 @@ export default class Game extends Component {
       onMoveShouldSetPanResponder: (evt, gestureState) => true,
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
       onPanResponderGrant: (evt, gestureState) => {
-        Matter.Body.setPosition(this.body.body, {x:this.body.body.position.x + 100, y:200/*this.body.body.position.y+50*/});
-        console.log("matter body is ", Matter.body)
+        //Possible solution: save velocity and angular velocity
+        //                    set velocity and angular velocity to 0
+        //                    translate
+        //                    reset velocities
+        //Matter.Body.translate(this.body.body, {x:0,y:50});
+        Matter.Body.setPosition(this.body.body, {x: 100, y: 100});
+        console.log("matter body is ", Matter.Body)
 
         // Matter.Body.applyForce(this.body.body, {x: this.body.body.position.x, y: this.body.body.position.y}, {x:0, y:12.5});
         // console.log("new position is ", this.body.body.position.y)
