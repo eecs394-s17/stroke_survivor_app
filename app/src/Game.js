@@ -21,7 +21,7 @@ export default class Game extends Component {
     Matter.Body.applyForce(this.body.body, {x:this.body.body.position.x,  y:this.body.body.position.y}, {x:this.state.direction*0.0075, y: 0});
     Matter.Body.setAngularVelocity(this.body.body, this.state.direction*0.1);
 
-    console.log(this.body.body.velocity);
+    // console.log(this.body.body.position);
   }
 
   handleCollision = (events) => {
@@ -106,9 +106,11 @@ export default class Game extends Component {
       onMoveShouldSetPanResponder: (evt, gestureState) => true,
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
       onPanResponderGrant: (evt, gestureState) => {
-        
+        Matter.Body.setPosition(this.body.body, {x:this.body.body.position.x + 100, y:200/*this.body.body.position.y+50*/});
+        console.log("matter body is ", Matter.body)
+
         // Matter.Body.applyForce(this.body.body, {x: this.body.body.position.x, y: this.body.body.position.y}, {x:0, y:12.5});
-        Matter.Body.setPosition(this.body.body, {x:this.body.body.position.x, y:this.body.body.position.y+50});
+        // console.log("new position is ", this.body.body.position.y)
         // Matter.Body.setVelocity(this.body.body, {x: 0, y: -9.8});
 
         // this.startPosition = {
@@ -118,7 +120,7 @@ export default class Game extends Component {
       },
       // onPanResponderMove: (evt, gestureState) => {
       //   Matter.Body.setPosition(this.body.body, {
-      //     x: this.startPosition.x + gestureState.dx,
+      //     x: this.startPositio n.x + gestureState.dx,
       //     y: this.startPosition.y + gestureState.dy,
       //   });
       // },
@@ -126,6 +128,7 @@ export default class Game extends Component {
         this.setState({
           gravity: 1,
         })
+
       }
 
 
