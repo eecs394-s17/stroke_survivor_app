@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityStrokeGame", "Assembly-CSharp.csproj", "{36D43266-BCA2-E44C-6F36-968C768A0C81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityStrokeGame", "Assembly-CSharp-Editor.csproj", "{5839ACC4-3392-6B41-1F6D-43EE53BCB7AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36D43266-BCA2-E44C-6F36-968C768A0C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D43266-BCA2-E44C-6F36-968C768A0C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D43266-BCA2-E44C-6F36-968C768A0C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D43266-BCA2-E44C-6F36-968C768A0C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5839ACC4-3392-6B41-1F6D-43EE53BCB7AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5839ACC4-3392-6B41-1F6D-43EE53BCB7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5839ACC4-3392-6B41-1F6D-43EE53BCB7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5839ACC4-3392-6B41-1F6D-43EE53BCB7AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

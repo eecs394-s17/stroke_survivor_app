@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Movement.cs">
+    <Files>
+      <File FileName="Assets/Movement.cs" Line="68" Column="24" />
+      <File FileName="../Desktop/gitStuff/LastHit/Tanks/Assets/Scripts/Soldier/SoldierMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Unity-Logs-Viewer/Reporter/Reporter.cs" Line="1" Column="1" />
+      <File FileName="Assets/Unity-Logs-Viewer/Reporter/Test/TestReporter.cs" Line="1" Column="1" />
+      <File FileName="Assets/PlayerFollow.cs" Line="17" Column="34" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
