@@ -15,5 +15,6 @@ public class PlayerFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.position = myPlay.position + myPos;
+		Debug.Log (this.gameObject.name);
 	}
 }
