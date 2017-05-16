@@ -69,6 +69,7 @@
      <Compile Include="Assets\scripts\QuitOnClick.cs" />
      <Compile Include="Assets\scripts\loadSceneOnClick.cs" />
      <Compile Include="Assets\scripts\makeWall.cs" />
+     <None Include="Assets\mClouds\Compiled-Unlit-Normal-nofog.shader" />
      <None Include="Assets\Unity UI Sample\Fonts\Jupiter\LICENSE.txt" />
      <None Include="Assets\StreamingAssets\build_info.txt" />
      <None Include="Assets\Unity UI Sample\Textures and Sprites\SF UI\Background\LICENSE.txt" />
@@ -94,6 +95,10 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{CD305791-7F71-C9DB-681D-3815BA9F3209}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

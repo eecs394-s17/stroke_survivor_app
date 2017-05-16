@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Editor\ReporterEditor.cs" />
+     <None Include="Assets\mClouds\Compiled-Unlit-Normal-nofog.shader" />
      <None Include="Assets\Unity UI Sample\Fonts\Jupiter\LICENSE.txt" />
      <None Include="Assets\StreamingAssets\build_info.txt" />
      <None Include="Assets\Unity UI Sample\Textures and Sprites\SF UI\Background\LICENSE.txt" />
@@ -116,6 +117,8 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{CD305791-7F71-C9DB-681D-3815BA9F3209}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{B05EE26B-6CC8-C9E8-2D29-3E4C873D5614}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>

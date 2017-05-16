@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 134500517678a42ce993459d3819b71a
+timeCreated: 1494890378
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Northern Lights
+  fontNames:
+  - Northern Lights
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
