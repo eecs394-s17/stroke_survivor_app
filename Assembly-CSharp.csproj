@@ -46,17 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Unity UI Sample\Scripts\ActiveStateToggler.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\ApplicationManager.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\ChangeColor.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\DragMe.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\DragPanel.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\DropMe.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\PanelManager.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\ResizePanel.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\ScrollDetailTexture.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\ShowSliderValue.cs" />
-     <Compile Include="Assets\Unity UI Sample\Scripts\TiltWindow.cs" />
      <Compile Include="Assets\Unity UI Sample\Textures and Sprites\MenuScript.cs" />
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\MultiKeyDictionary.cs" />
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Reporter.cs" />
@@ -64,6 +53,17 @@
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\ReporterMessageReceiver.cs" />
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Test\Rotate.cs" />
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Test\TestReporter.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\ActiveStateToggler.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\ApplicationManager.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\ChangeColor.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\DragMe.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\DragPanel.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\DropMe.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\PanelManager.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\ResizePanel.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\ScrollDetailTexture.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\ShowSliderValue.cs" />
+     <Compile Include="Assets\Unity-Logs-Viewer\Scripts\TiltWindow.cs" />
      <Compile Include="Assets\scripts\CameraParallax.cs" />
      <Compile Include="Assets\scripts\Movement.cs" />
      <Compile Include="Assets\scripts\PlayerFollow.cs" />
