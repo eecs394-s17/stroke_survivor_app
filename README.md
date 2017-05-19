@@ -17,7 +17,7 @@ MacOSX: https://dl.google.com/android/repository/tools_r25.2.3-macosx.zip -
 
 
 
-Editing the code in scenes:
+## Editing the code in scenes of Unity:
 
 Step 1) https://drive.google.com/file/d/0BxlX8gnBsVrcODk2WmZnLTZOMzQ/view?usp=sharing
 
