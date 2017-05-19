@@ -3,12 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
+
+public class User {
+	public string username;
+	public string email;
+	public int repCount;
+
+	public User() {
+	}
+
+	public User(string username, string email) {
+		this.username = username;
+		this.email = email;
+		this.repCount = 0;
+	}
+}
+
 
 public class Movement : MonoBehaviour {
 	public float m_direction = 1f;
 	public float m_speed = 9f;
 	public int m_jumpPower = 400;
 	public Text repCountText;
+	public Text timer;
+	public float timeLeft = 60.0f;
 
 	private bool isGrounded = true;
 	private bool isOverThreshold = false;
@@ -31,7 +52,6 @@ public class Movement : MonoBehaviour {
 
 
 
-
 	// Use this for initialization
 	void Start () {
 		m_rigidBody = GetComponent<Rigidbody2D> ();
@@ -39,6 +59,18 @@ public class Movement : MonoBehaviour {
 		setCountText ();
 		createPlank ();
 //		createPlank ();
+
+
+		// Set up the Editor before calling into the realtime database.
+		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://strokesurvivors-605a1.firebaseio.com/");
+
+		// Get the root reference location of the database.
+		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+
+		User user = new User("chankyuoh", "chankyu@gmail.com");
+		string json = JsonUtility.ToJson(user);
+
+		reference.Child("users").Child("1").SetRawJsonValueAsync(json);
 
 	}
 		
