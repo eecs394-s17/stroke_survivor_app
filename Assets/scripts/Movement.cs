@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using UnityEngine.SceneManagement;
+
 using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
@@ -36,9 +38,10 @@ public class Movement : MonoBehaviour {
 	private  float distToGround;
 	private Rigidbody2D m_rigidBody;
 	private Collision2D m_collision;
+	private bool isGameOver = false;
 
 
-	private int repCounter;
+	public int repCounter;
 
 	public Transform plank;
 	public Transform fullLengthPlank;
@@ -61,16 +64,6 @@ public class Movement : MonoBehaviour {
 //		createPlank ();
 
 
-		// Set up the Editor before calling into the realtime database.
-		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://strokesurvivors-605a1.firebaseio.com/");
-
-		// Get the root reference location of the database.
-		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-
-		User user = new User("chankyuoh", "chankyu@gmail.com");
-		string json = JsonUtility.ToJson(user);
-
-		reference.Child("users").Child("1").SetRawJsonValueAsync(json);
 
 	}
 		
@@ -123,6 +116,31 @@ public class Movement : MonoBehaviour {
 			//Instantiate(Plank, Vector3 (1, 0, 0), Quaternion.identity);
 		}
 
+		timeLeft -= UnityEngine.Time.deltaTime;
+		timer.text = "" + Mathf.Round(timeLeft);
+		print (timeLeft.ToString ());
+
+		if (timeLeft < 0) {
+			timeLeft = 0;
+			isGameOver = true;
+		}
+
+		if (isGameOver) {
+			// Set up the Editor before calling into the realtime database.
+			FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://strokesurvivors-605a1.firebaseio.com/");
+
+			// Get the root reference location of the database.
+			DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+
+			User user = new User("chankyuoh", "chankyu@gmail.com");
+			user.repCount = this.repCounter;
+			string json = JsonUtility.ToJson(user);
+
+			reference.Child("users").Child("1").SetRawJsonValueAsync(json);
+			SceneManager.LoadScene (1);
+			isGameOver = false;
+		}
+
 			
 	}
 	void fillHole() {
@@ -143,6 +161,10 @@ public class Movement : MonoBehaviour {
 
 	void setCountText() {
 		repCountText.text = "Rep Count: " + repCounter.ToString ();
+	}
+
+	void updateTimerText() {
+		timer.text = "Time Left: " + "10";
 	}
 		
 

@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:138213520008:android:60bb95643898e37d",
+        "mobilesdk_app_id": "1:138213520008:android:cdfeb8ac1826858f",
         "android_client_info": {
-          "package_name": "com.Company.ProductName"
+          "package_name": "com.EECS394.StrokeSurvivors"
         }
       },
       "oauth_client": [

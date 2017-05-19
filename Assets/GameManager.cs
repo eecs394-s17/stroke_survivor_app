@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFollow : MonoBehaviour {
-
-	public Vector3 myPos;
-	public Transform myPlay;
+public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +11,6 @@ public class PlayerFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = myPlay.position + myPos;
-		//Debug.Log (this.gameObject.name);
+		
 	}
 }
