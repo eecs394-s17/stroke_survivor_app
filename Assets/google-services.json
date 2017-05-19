@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "138213520008",
+    "firebase_url": "https://strokesurvivors-605a1.firebaseio.com",
+    "project_id": "strokesurvivors-605a1",
+    "storage_bucket": "strokesurvivors-605a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138213520008:android:cdfeb8ac1826858f",
+        "android_client_info": {
+          "package_name": "com.EECS394.StrokeSurvivors"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "138213520008-2kfv87hqrarvaq7ogc3n6c5huam2id6l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0bVVBO635aIZYy4srq2J_7mk5jHE0gDI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
