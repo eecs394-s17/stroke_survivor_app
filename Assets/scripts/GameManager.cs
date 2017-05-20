@@ -60,22 +60,12 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (isGameOver) {
-			gameOverRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString (); 
-			GameOverScreen.gameObject.SetActive (true);
-			m_movement.enabled = false;
+			enableGameOverScreen (); 
 
-			// Set up the Editor before calling into the realtime database.
-			FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://strokesurvivors-605a1.firebaseio.com/");
+			postDataToFirebase ();
 
-			// Get the root reference location of the database.
-			DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
 
-			User user = new User("chankyuoh", "chankyu@gmail.com");
-			user.repCount = m_movement.repCounter;
-			user.date = System.DateTime.Now.ToString ("yyyy/MM/dd HH:mm:ss");
-			string json = JsonUtility.ToJson(user);
 
-			reference.Child("users").Child("2").SetRawJsonValueAsync(json);
 //			SceneManager.LoadScene (1);
 			isGameOver = false;
 		}
@@ -86,4 +76,23 @@ public class GameManager : MonoBehaviour {
 		inGameRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
 	}
 
+	void enableGameOverScreen ()
+	{
+		gameOverRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
+		GameOverScreen.gameObject.SetActive (true);
+		m_movement.enabled = false;
+	}
+
+	void postDataToFirebase ()
+	{
+		// Set up the Editor before calling into the realtime database.
+		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
+		// Get the root reference location of the database.
+		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+		User user = new User ("chankyuoh", "chankyu@gmail.com");
+		user.repCount = m_movement.repCounter;
+		user.date = System.DateTime.Now.ToString ("yyyy/MM/dd HH:mm:ss");
+		string json = JsonUtility.ToJson (user);
+		reference.Child ("users").Child ("2").SetRawJsonValueAsync (json);
+	}
 }

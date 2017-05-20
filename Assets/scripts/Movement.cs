@@ -45,7 +45,7 @@ public class Movement : MonoBehaviour {
 		Move ();
 
 		//print(Input.acceleration.y);
-		if (Mathf.Abs(Input.acceleration.y) > .9f)
+		if (Mathf.Abs(Input.acceleration.y) > .8f)
 		{
 			isOverThreshold = true;
 			//print("JUMPING! x,y,z is: ");
@@ -133,4 +133,5 @@ public class Movement : MonoBehaviour {
 		}
 
 	}
+
 }
