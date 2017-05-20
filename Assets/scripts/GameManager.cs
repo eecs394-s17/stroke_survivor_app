@@ -30,15 +30,26 @@ public class GameManager : MonoBehaviour {
 	public float timeLeft; // time in seconds left before game over
 	private bool isGameOver = false;
 	private Movement m_movement;
-	public GameObject m_instance;
+	public GameObject m_ballInstance;
+	public Text gameOverRepCountText;
+	public Text inGameRepCountText;
+	public Canvas GameOverScreen;
+
+
 	// Use this for initialization
 	void Start () {
-		m_instance = GameObject.Find ("BallSprite");
-		m_movement = m_instance.GetComponent<Movement> ();
+		GameOverScreen.gameObject.SetActive (false);
+		m_ballInstance = GameObject.Find ("BallSprite");
+		m_movement = m_ballInstance.GetComponent<Movement> ();
+		setRepCountText ();
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		setRepCountText ();
+
 		timeLeft -= UnityEngine.Time.deltaTime;
 		this.timer.text = "" + Mathf.Round(timeLeft);
 		print (timeLeft.ToString ());
@@ -49,6 +60,10 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (isGameOver) {
+			gameOverRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString (); 
+			GameOverScreen.gameObject.SetActive (true);
+			m_movement.enabled = false;
+
 			// Set up the Editor before calling into the realtime database.
 			FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://strokesurvivors-605a1.firebaseio.com/");
 
@@ -61,8 +76,14 @@ public class GameManager : MonoBehaviour {
 			string json = JsonUtility.ToJson(user);
 
 			reference.Child("users").Child("2").SetRawJsonValueAsync(json);
-			SceneManager.LoadScene (1);
+//			SceneManager.LoadScene (1);
 			isGameOver = false;
 		}
 	}
+
+	void setRepCountText() {
+//		print (m_movement.repCounter);
+		inGameRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
+	}
+
 }
