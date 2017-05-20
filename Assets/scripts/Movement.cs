@@ -26,15 +26,16 @@ public class User {
 
 
 public class Movement : MonoBehaviour {
-	public float m_direction = 1f;
-	public float m_speed = 9f;
-	public int m_jumpPower = 400;
+	public float m_direction = 1f; // 1f == moving right, -1f == moving left
+	public float m_speed = 9f;  // speed of the ball
+	public float m_threshold = 0.8f; // threshold y value you have to go over to make ball jump
+	public int m_jumpPower = 400;  
 	public Text repCountText;
 	public Text timer;
-	public float timeLeft = 60.0f;
+	public float timeLeft = 60.0f; // time in seconds left before game over
 
-	private bool isGrounded = true;
-	private bool isOverThreshold = false;
+	private bool isGrounded = true;  // determines whether the ball is touching the ground or not
+	private bool isOverThreshold = false; // determines if current y value is over the threshold for jumping
 	private  float distToGround;
 	private Rigidbody2D m_rigidBody;
 	private Collision2D m_collision;
@@ -57,49 +58,38 @@ public class Movement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// get the RigidBody component, which has access to all the physics stuff
 		m_rigidBody = GetComponent<Rigidbody2D> ();
 		repCounter = 0;
 		setCountText ();
-		createPlank ();
-//		createPlank ();
-
-
+		createPlank (); // create the initial plank
 
 	}
 		
 	
-	// Update is called once per frame
+	// FixedUpdate is called once per frame, aka GameLoop
 	private void FixedUpdate () {
 			    
-		Move ();
+		Move ();  // keep moving ball horizontally
 
-		//print(Input.acceleration.y);
-		if (Mathf.Abs(Input.acceleration.y) > .9f && isGrounded)
+		if (Mathf.Abs(Input.acceleration.y) > this.m_threshold && isGrounded)
 		{
-			
-			if (!isOverThreshold) {
+			if (!isOverThreshold) 
+			{
 				jump ();
-
 			}
 			isOverThreshold = true;
-
-				
-
-			//print("JUMPING! x,y,z is: ");
-			//print (Input.acceleration.x);
-//			print(Input.acceleration.y);
-			//print(Input.acceleration.z);
-
 		}
 
-		if (m_rigidBody.position.y > currentPlankMaxHeight-heightDifferenceBetweenPlanks*2) {
+		if (m_rigidBody.position.y > currentPlankMaxHeight-heightDifferenceBetweenPlanks*2) 
+		{
 			createPlank ();
 			fillHole ();
 		}
 
-		if (isOverThreshold && Mathf.Abs(Input.acceleration.y) < .5f) {
+		if (isOverThreshold && Mathf.Abs(Input.acceleration.y) < .5f) 
+		{
 			print (Input.acceleration.y);
-
 			repCounter += 1;
 			isOverThreshold = false;
 			setCountText ();
@@ -108,12 +98,7 @@ public class Movement : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Space) && isGrounded)
 		{
-			//print("JUMPING! x,y,z is: ");
-			//print (Input.acceleration.x);
-			//print(Input.acceleration.z);
-
 			jump ();
-			//Instantiate(Plank, Vector3 (1, 0, 0), Quaternion.identity);
 		}
 
 		timeLeft -= UnityEngine.Time.deltaTime;
@@ -159,6 +144,7 @@ public class Movement : MonoBehaviour {
 //		plank.name = "plankNum"+ plankCount;
 	}
 
+	// sets the rep count text to the current rep count
 	void setCountText() {
 		repCountText.text = "Rep Count: " + repCounter.ToString ();
 	}
@@ -173,7 +159,7 @@ public class Movement : MonoBehaviour {
 		isGrounded = false;
 	}
 
-
+	// keeps moving the ball horizontally back and forth
 	private void Move()
 	{
 		//Vector2 movement = transform.forward*1* m_speed * Time.deltaTime;
