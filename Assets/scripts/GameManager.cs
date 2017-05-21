@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
 	public Text gameOverRepCountText;
 	public Text inGameRepCountText;
 	public Canvas GameOverScreen;
+	private bool dataSent = false;
 
 
 	// Use this for initialization
@@ -52,24 +53,26 @@ public class GameManager : MonoBehaviour {
 
 		timeLeft -= UnityEngine.Time.deltaTime;
 		this.timer.text = "" + Mathf.Round(timeLeft);
-		print (timeLeft.ToString ());
+		//print (timeLeft.ToString ());
 
 		if (timeLeft < 0) {
 			timeLeft = 0;
 			isGameOver = true;
 		}
 
-		if (isGameOver) {
-			enableGameOverScreen (); 
 
+		if (this.isGameOver  && !this.dataSent) {
+			enableGameOverScreen (); 
+			this.isGameOver = false;
 			postDataToFirebase ();
 
-
-
-//			SceneManager.LoadScene (1);
-			isGameOver = false;
 		}
+
+
+
+
 	}
+
 
 	void setRepCountText() {
 //		print (m_movement.repCounter);
@@ -85,6 +88,8 @@ public class GameManager : MonoBehaviour {
 
 	void postDataToFirebase ()
 	{
+		this.dataSent = true;
+		print ("entering firebase");
 		// Set up the Editor before calling into the realtime database.
 		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
 		// Get the root reference location of the database.
@@ -93,6 +98,8 @@ public class GameManager : MonoBehaviour {
 		user.repCount = m_movement.repCounter;
 		user.date = System.DateTime.Now.ToString ("yyyy/MM/dd HH:mm:ss");
 		string json = JsonUtility.ToJson (user);
-		reference.Child ("users").Child ("2").SetRawJsonValueAsync (json);
+		//reference.Child ("games").SetRawJsonValueAsync (json);
+		//reference.Child ("games").Push (json);
+		reference.Child ("games").Push ().SetRawJsonValueAsync (json);
 	}
 }
