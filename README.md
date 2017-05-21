@@ -25,3 +25,9 @@ Step 2) https://drive.google.com/file/d/0BxlX8gnBsVrcTHJROUl3UWZseWs/view?usp=sh
 
 ## Using Firebase
 https://firebase.google.com/docs/database/unity/retrieve-data 
+
+## Debugging
+
+https://www.assetstore.unity3d.com/en/#!/content/12047
+
+Opens in Unity assets store; swipe phone screen in circle motion to activate
