@@ -41,41 +41,42 @@ public class Movement : MonoBehaviour {
 
 	// Update is called once per frame
 	private void FixedUpdate () {
+		if (GameManager.gameStarted) {
+			
+			Move ();
 
-		Move ();
+			//print(Input.acceleration.y);
+			if (Mathf.Abs (Input.acceleration.y) > .8f) {
+				isOverThreshold = true;
+				//print("JUMPING! x,y,z is: ");
+				//print (Input.acceleration.x);
+				print (Input.acceleration.y);
+				//print(Input.acceleration.z);
 
-		//print(Input.acceleration.y);
-		if (Mathf.Abs(Input.acceleration.y) > .8f)
-		{
-			isOverThreshold = true;
-			//print("JUMPING! x,y,z is: ");
-			//print (Input.acceleration.x);
-			print(Input.acceleration.y);
-			//print(Input.acceleration.z);
+				jump ();
+			}
 
-			jump ();
-		}
+			if (m_rigidBody.position.y > currentPlankMaxHeight - heightDifferenceBetweenPlanks * 2) {
+				createPlank ();
+			}
 
-		if (m_rigidBody.position.y > currentPlankMaxHeight-heightDifferenceBetweenPlanks*2) {
-			createPlank ();
-		}
+			if (isOverThreshold && Mathf.Abs (Input.acceleration.y) < .5f) {
+				print (Input.acceleration.y);
 
-		if (isOverThreshold && Mathf.Abs(Input.acceleration.y) < .5f) {
-			print (Input.acceleration.y);
-
-			repCounter += 1;
-			isOverThreshold = false;
-		}
+				repCounter += 1;
+				isOverThreshold = false;
+			}
 
 
-		if (Input.GetKeyDown (KeyCode.Space))
-		{
-			//print("JUMPING! x,y,z is: ");
-			//print (Input.acceleration.x);
-			//print(Input.acceleration.z);
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				//print("JUMPING! x,y,z is: ");
+				//print (Input.acceleration.x);
+				//print(Input.acceleration.z);
 
-			jump ();
-			//Instantiate(Plank, Vector3 (1, 0, 0), Quaternion.identity);
+				jump ();
+				//Instantiate(Plank, Vector3 (1, 0, 0), Quaternion.identity);
+			}
+
 		}
 
 

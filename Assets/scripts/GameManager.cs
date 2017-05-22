@@ -35,36 +35,48 @@ public class GameManager : MonoBehaviour {
 	public Text inGameRepCountText;
 	public Canvas GameOverScreen;
 	private bool dataSent = false;
+	public Button easyButton;
+	public Button mediumButton;
+	public Button hardButton;
+	public Canvas difficultyScreen;
+	public static bool gameStarted = false;
 
 
 	// Use this for initialization
 	void Start () {
+		difficultyScreen.gameObject.SetActive (true);
 		GameOverScreen.gameObject.SetActive (false);
 		m_ballInstance = GameObject.Find ("BallSprite");
 		m_movement = m_ballInstance.GetComponent<Movement> ();
 		setRepCountText ();
+		easyButton.onClick.AddListener(easyClick);
+		mediumButton.onClick.AddListener(mediumClick);
+		hardButton.onClick.AddListener(hardClick);
 
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		setRepCountText ();
+		if (GameManager.gameStarted) {
+			setRepCountText ();
 
-		timeLeft -= UnityEngine.Time.deltaTime;
-		this.timer.text = "" + Mathf.Round(timeLeft);
-		//print (timeLeft.ToString ());
+			timeLeft -= UnityEngine.Time.deltaTime;
+			this.timer.text = "" + Mathf.Round (timeLeft);
+			//print (timeLeft.ToString ());
 
-		if (timeLeft < 0) {
-			timeLeft = 0;
-			isGameOver = true;
-		}
+			if (timeLeft < 0) {
+				timeLeft = 0;
+				isGameOver = true;
+			}
 
 
-		if (this.isGameOver  && !this.dataSent) {
-			enableGameOverScreen (); 
-			this.isGameOver = false;
-			postDataToFirebase ();
+			if (this.isGameOver && !this.dataSent) {
+				enableGameOverScreen (); 
+				this.isGameOver = false;
+				postDataToFirebase ();
+
+			}
 
 		}
 
@@ -84,6 +96,7 @@ public class GameManager : MonoBehaviour {
 		gameOverRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
 		GameOverScreen.gameObject.SetActive (true);
 		m_movement.enabled = false;
+		GameManager.gameStarted = false;
 	}
 
 	void postDataToFirebase ()
@@ -101,5 +114,26 @@ public class GameManager : MonoBehaviour {
 		//reference.Child ("games").SetRawJsonValueAsync (json);
 		//reference.Child ("games").Push (json);
 		reference.Child ("games").Push ().SetRawJsonValueAsync (json);
+	}
+
+	void easyClick()
+	{
+		this.timeLeft = 60f;
+		difficultyScreen.gameObject.SetActive (false);
+		GameManager.gameStarted = true;
+	}
+
+	void mediumClick()
+	{
+		this.timeLeft = 120f;
+		difficultyScreen.gameObject.SetActive (false);
+		GameManager.gameStarted = true;
+	}
+
+	void hardClick()
+	{
+		this.timeLeft = 180f;
+		difficultyScreen.gameObject.SetActive (false);
+		GameManager.gameStarted = true;
 	}
 }
