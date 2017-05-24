@@ -66,6 +66,7 @@
      <Compile Include="Assets\Unity-Logs-Viewer\Scripts\ShowSliderValue.cs" />
      <Compile Include="Assets\Unity-Logs-Viewer\Scripts\TiltWindow.cs" />
      <Compile Include="Assets\scripts\CameraParallax.cs" />
+     <Compile Include="Assets\scripts\EmailPassword.cs" />
      <Compile Include="Assets\scripts\GameManager.cs" />
      <Compile Include="Assets\scripts\Movement.cs" />
      <Compile Include="Assets\scripts\PlayerFollow.cs" />
@@ -90,6 +91,9 @@
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
      <None Include="Assets\PlayServicesResolver\proguard-unity.txt" />
      <None Include="Assets\Firebase\Plugins\Http\link.xml" />
+ <Reference Include="Facebook.Unity.Settings">
+ <HintPath>/Users/brianzhan/Desktop/stroke_survivor_app/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
@@ -112,25 +116,25 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.App">
- <HintPath>/Users/chankyuoh/gitStuff/stroke_survivor_app/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
+ <HintPath>/Users/brianzhan/Desktop/stroke_survivor_app/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Auth">
- <HintPath>/Users/chankyuoh/gitStuff/stroke_survivor_app/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+ <HintPath>/Users/brianzhan/Desktop/stroke_survivor_app/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Database">
- <HintPath>/Users/chankyuoh/gitStuff/stroke_survivor_app/Assets/Firebase/Plugins/Firebase.Database.dll</HintPath>
+ <HintPath>/Users/brianzhan/Desktop/stroke_survivor_app/Assets/Firebase/Plugins/Firebase.Database.dll</HintPath>
  </Reference>
  <Reference Include="Google.MiniJson">
- <HintPath>/Users/chankyuoh/gitStuff/stroke_survivor_app/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+ <HintPath>/Users/brianzhan/Desktop/stroke_survivor_app/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
  </Reference>
  <Reference Include="Google.Sharpen">
- <HintPath>/Users/chankyuoh/gitStuff/stroke_survivor_app/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
+ <HintPath>/Users/brianzhan/Desktop/stroke_survivor_app/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Compat">
- <HintPath>/Users/chankyuoh/gitStuff/stroke_survivor_app/Assets/Firebase/Plugins/Unity.Compat.dll</HintPath>
+ <HintPath>/Users/brianzhan/Desktop/stroke_survivor_app/Assets/Firebase/Plugins/Unity.Compat.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Tasks">
- <HintPath>/Users/chankyuoh/gitStuff/stroke_survivor_app/Assets/Firebase/Plugins/Unity.Tasks.dll</HintPath>
+ <HintPath>/Users/brianzhan/Desktop/stroke_survivor_app/Assets/Firebase/Plugins/Unity.Tasks.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
