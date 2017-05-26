@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour {
 	void easyClick()
 	{
 		this.timeLeft = 60f;
+		m_movement.m_speed = 4f;
 		difficultyScreen.gameObject.SetActive (false);
 		GameManager.gameStarted = true;
 	}
@@ -129,6 +130,7 @@ public class GameManager : MonoBehaviour {
 	void mediumClick()
 	{
 		this.timeLeft = 120f;
+		m_movement.m_speed = 7f;
 		difficultyScreen.gameObject.SetActive (false);
 		GameManager.gameStarted = true;
 	}
@@ -136,6 +138,7 @@ public class GameManager : MonoBehaviour {
 	void hardClick()
 	{
 		this.timeLeft = 180f;
+		m_movement.m_speed = 9f;
 		difficultyScreen.gameObject.SetActive (false);
 		GameManager.gameStarted = true;
 	}
