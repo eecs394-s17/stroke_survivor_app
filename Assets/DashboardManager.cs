@@ -35,16 +35,27 @@ public class DashboardManager : MonoBehaviour {
 					GameHistoryText.text += "\t\t\t\tHighscore:" + snapshot.Child("highscore").GetRawJsonValue() + " reps";
 					GameHistoryText.text += "\n\n";
 					GameHistoryText.text += "\t\t\t\tDate\t\t\t\t\t\t\t\t\tReps\n";
+					long highScore = 0;
 					foreach(DataSnapshot item in snapshot.Children)
 					{
 						// do something with entry.Value or entry.Key
 //						print(item.Child("date").Value);
 						string date = item.Child("date").Value.ToString();
 						string repCount = item.Child("repCount").Value.ToString();
+						if((long)item.Child("repCount").Value > (long)highScore) {
+//							print("high score updated");
+							highScore = (long)item.Child("repCount").Value;
+//							print("high score now " + highScore);
+//							GameHistoryText.text += "high score" + "\t\t\t" + highScore + "\n";
+						}	
+
 
 						GameHistoryText.text += date + "\t\t\t" + repCount + "\n";
 
 					}
+					print("got here");
+					GameHistoryText.text += "here";
+
 				}
 			});
 	}
