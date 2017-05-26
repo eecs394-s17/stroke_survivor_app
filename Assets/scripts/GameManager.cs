@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
+
 		difficultyScreen.gameObject.SetActive (true);
 		GameOverScreen.gameObject.SetActive (false);
 		m_ballInstance = GameObject.Find ("BallSprite");
@@ -104,7 +107,7 @@ public class GameManager : MonoBehaviour {
 		this.dataSent = true;
 		print ("entering firebase");
 		// Set up the Editor before calling into the realtime database.
-		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
+//		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
 		// Get the root reference location of the database.
 		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
 		User user = new User ("chankyuoh", "chankyu@gmail.com");
