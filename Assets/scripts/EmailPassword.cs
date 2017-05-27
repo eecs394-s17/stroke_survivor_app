@@ -37,7 +37,8 @@ public class EmailPassword : MonoBehaviour
 			user = auth.CurrentUser;
 			if (signedIn) {
 				print("Signed in " + user.UserId); // UserID is the email (important!!!)
-				displayName = user.DisplayName ?? "";
+				displayName = user.UserId;
+				print ("display name is " + user.UserId);
 			}
 		}
 	}

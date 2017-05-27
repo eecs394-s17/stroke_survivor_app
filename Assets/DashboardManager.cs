@@ -6,20 +6,47 @@ using UnityEngine.SceneManagement;
 using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
+using Firebase.Auth;
 
 
 public class DashboardManager : MonoBehaviour {
 	public Text GameHistoryText;
+	Firebase.Auth.FirebaseAuth auth;
+	Firebase.Auth.FirebaseUser user;
+
+
+	void InitializeFirebase() {
+		Debug.Log("Setting up Firebase Auth");
+		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+		auth.StateChanged += AuthStateChanged;
+		AuthStateChanged(this, null);
+	}
+
+	// Track state changes of the auth object.
+	void AuthStateChanged(object sender, System.EventArgs eventArgs) {
+		if (auth.CurrentUser != user) {
+			bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null;
+			if (!signedIn && user != null) {
+				Debug.Log("Signed out " + user.UserId);
+			}
+			user = auth.CurrentUser;
+			if (signedIn) {
+				Debug.Log("Signed in " + user.UserId);
+			}
+			print ("done");
+		}
+	}
+
+
 
 	// Use this for initialization
 	void Start () {
+		InitializeFirebase ();
 
 		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
 		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
 
 		GameHistoryText.text = "\n\n";
-
-
 
 		FirebaseDatabase.DefaultInstance
 			.GetReference("games")
