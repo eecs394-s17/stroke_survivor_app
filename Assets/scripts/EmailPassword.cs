@@ -21,13 +21,14 @@ public class EmailPassword : MonoBehaviour
 	public Firebase.Auth.FirebaseUser user;
 	public string displayName = "";
 
-	void InitializeFirebase() {
+	public void InitializeFirebase() {
 		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 		auth.StateChanged += AuthStateChanged;
 		AuthStateChanged(this, null);
 	}
 
-	void AuthStateChanged(object sender, System.EventArgs eventArgs) {
+	public void AuthStateChanged(object sender, System.EventArgs eventArgs) {
+		print("current user is " + auth.CurrentUser);
 		if (auth.CurrentUser != user) {
 			bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null;
 			if (!signedIn && user != null) {
@@ -44,7 +45,7 @@ public class EmailPassword : MonoBehaviour
 	void Start()
 	{
 		InitializeFirebase ();
-		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+//		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 		print("Entered login.");
 		//		UserNameInput.text = "demofirebase@gmail.com";
 		//		PasswordInput.text = "abcdefgh";
@@ -76,7 +77,6 @@ public class EmailPassword : MonoBehaviour
 				Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
 				return;
 			}
-
 			// Firebase user has been created.
 			Firebase.Auth.FirebaseUser newUser = task.Result;
 			Debug.LogFormat("Firebase user created successfully: {0} ({1})",
@@ -110,6 +110,7 @@ public class EmailPassword : MonoBehaviour
 				PlayerPrefs.SetString("LoginUser", user != null ? user.Email : "Unknown");
 				SceneManager.LoadScene("MainMenu");
 			});
+		auth.StateChanged += AuthStateChanged;
 	}
 
 	private void UpdateErrorMessage(string message)
