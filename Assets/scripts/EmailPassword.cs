@@ -14,7 +14,7 @@ using Firebase.Unity.Editor;
 public class EmailPassword : MonoBehaviour
 {
 
-	private FirebaseAuth auth;
+	public FirebaseAuth auth;
 	public InputField UserNameInput, PasswordInput;
 	public Button SignupButton, LoginButton;
 	public Text ErrorText;
@@ -85,7 +85,7 @@ public class EmailPassword : MonoBehaviour
 					user.DisplayName, user.UserId);
 
 				PlayerPrefs.SetString("LoginUser", user != null ? user.Email : "Unknown");
-				SceneManager.LoadScene("LoginResults");
+				SceneManager.LoadScene("MainMenu");
 			});
 	}
 
