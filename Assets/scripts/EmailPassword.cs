@@ -36,7 +36,7 @@ public class EmailPassword : MonoBehaviour
 			}
 			user = auth.CurrentUser;
 			if (signedIn) {
-				print("Signed in " + user.UserId);
+				print("Signed in " + user.UserId); // UserID is the email (important!!!)
 				displayName = user.DisplayName ?? "";
 			}
 		}
@@ -110,7 +110,6 @@ public class EmailPassword : MonoBehaviour
 				PlayerPrefs.SetString("LoginUser", user != null ? user.Email : "Unknown");
 				SceneManager.LoadScene("MainMenu");
 			});
-		auth.StateChanged += AuthStateChanged;
 	}
 
 	private void UpdateErrorMessage(string message)
