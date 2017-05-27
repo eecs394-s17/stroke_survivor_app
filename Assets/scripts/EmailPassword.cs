@@ -18,9 +18,32 @@ public class EmailPassword : MonoBehaviour
 	public InputField UserNameInput, PasswordInput;
 	public Button SignupButton, LoginButton;
 	public Text ErrorText;
+	public Firebase.Auth.FirebaseUser user;
+	public string displayName = "";
 
+	void InitializeFirebase() {
+		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+		auth.StateChanged += AuthStateChanged;
+		AuthStateChanged(this, null);
+	}
+
+	void AuthStateChanged(object sender, System.EventArgs eventArgs) {
+		if (auth.CurrentUser != user) {
+			bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null;
+			if (!signedIn && user != null) {
+				print("Signed out " + user.UserId);
+			}
+			user = auth.CurrentUser;
+			if (signedIn) {
+				print("Signed in " + user.UserId);
+				displayName = user.DisplayName ?? "";
+			}
+		}
+	}
+		
 	void Start()
 	{
+		InitializeFirebase ();
 		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 		print("Entered login.");
 		//		UserNameInput.text = "demofirebase@gmail.com";
