@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour {
 
 	public Transform plank;
 
-	private int plankCount = 0;
+	public static int plankCount = 0;
 	private int plankDirection = 1;
 
 	private float currentPlankMaxHeight = 0;

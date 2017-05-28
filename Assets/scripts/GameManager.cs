@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject m_ballInstance;
 	public Text gameOverRepCountText;
 	public Text inGameRepCountText;
+	public Text heightScoreText;
 	public Canvas GameOverScreen;
 	private bool dataSent = false;
 	public Button easyButton;
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour {
 
 			timeLeft -= UnityEngine.Time.deltaTime;
 			this.timer.text = "" + Mathf.Round (timeLeft);
+			this.heightScoreText.text = (Movement.plankCount - 2).ToString (); // plank count starts from 2 because 2 planks are initially initialized
 			//print (timeLeft.ToString ());
 
 			if (timeLeft < 0) {
