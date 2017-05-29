@@ -49,7 +49,7 @@ public class DashboardManager : MonoBehaviour {
 		GameHistoryText.text = "\n\n";
 
 		FirebaseDatabase.DefaultInstance
-			.GetReference("games")
+			.GetReference("users")
 			.GetValueAsync().ContinueWith(task => {
 				if (task.IsFaulted) {
 					// Handle the error...
@@ -59,29 +59,24 @@ public class DashboardManager : MonoBehaviour {
 					// Do something with snapshot...
 //					print(snapshot.Children);
 //					print(snapshot.Child("-KkgCwU06xh0wsMT7q0Q").GetRawJsonValue());
-					GameHistoryText.text += "\t\t\t\tHighscore:" + snapshot.Child("highscore").GetRawJsonValue() + " reps";
+					GameHistoryText.text += "\t\t\t\tHighscore:" + snapshot.Child(user.UserId).Child("highScore").Value.ToString();
 					GameHistoryText.text += "\n\n";
-					GameHistoryText.text += "\t\t\t\tDate\t\t\t\t\t\t\t\t\tReps\n";
-					long highScore = 0;
-					foreach(DataSnapshot item in snapshot.Children)
+					GameHistoryText.text += "\t\tDate\t\t\t\t\t\tReps\t\t\tScore\n";
+
+
+					foreach(DataSnapshot item in snapshot.Child(user.UserId).Child("games").Children)
 					{
 						// do something with entry.Value or entry.Key
 //						print(item.Child("date").Value);
+
+
 						string date = item.Child("date").Value.ToString();
-						string repCount = item.Child("repCount").Value.ToString();
-						if((long)item.Child("repCount").Value > (long)highScore) {
-//							print("high score updated");
-							highScore = (long)item.Child("repCount").Value;
-//							print("high score now " + highScore);
-//							GameHistoryText.text += "high score" + "\t\t\t" + highScore + "\n";
-						}	
+						string repCount = item.Child("repCount").Value.ToString();	
+						string score = item.Child("score").Value.ToString();
 
-
-						GameHistoryText.text += date + "\t\t\t" + repCount + "\n";
+						GameHistoryText.text += date + "\t\t\t   " + repCount + "\t\t\t" + score+ "\n";
 
 					}
-					print("got here");
-					GameHistoryText.text += "here";
 
 				}
 			});
