@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void setScoreCountText() {
-		heightScoreText.text = "Height Score: " +currGameScore.ToString ();
+		heightScoreText.text = "Score: " +currGameScore.ToString ();
 	}
 
 	void setRepCountText() {
@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour {
 	void setGameOverText ()
 	{
 		gameOverRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
-		gameOverRepCountText.text += "\n Height Score: " + currGameScore.ToString ();
+		gameOverRepCountText.text += "\n Score: " + currGameScore.ToString ();
 	}
 		
 	void resetGameSettings()
