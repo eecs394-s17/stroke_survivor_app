@@ -14,7 +14,6 @@ public class DashboardManager : MonoBehaviour {
 	Firebase.Auth.FirebaseAuth auth;
 	Firebase.Auth.FirebaseUser user;
 
-
 	void InitializeFirebase() {
 		Debug.Log("Setting up Firebase Auth");
 		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
@@ -33,59 +32,48 @@ public class DashboardManager : MonoBehaviour {
 			if (signedIn) {
 				Debug.Log("Signed in " + user.UserId);
 			}
-			print ("done");
 		}
 	}
-
-
-
+		
 	// Use this for initialization
 	void Start () {
 		InitializeFirebase ();
-
 		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
 		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-
 		GameHistoryText.text = "\n\n";
-
 		FirebaseDatabase.DefaultInstance
 			.GetReference("users")
 			.GetValueAsync().ContinueWith(task => {
 				if (task.IsFaulted) {
-					// Handle the error...
+					Debug.LogError("error while retreiving data");
 				}
 				else if (task.IsCompleted) {
 					DataSnapshot snapshot = task.Result;
-					// Do something with snapshot...
-//					print(snapshot.Children);
-//					print(snapshot.Child("-KkgCwU06xh0wsMT7q0Q").GetRawJsonValue());
-					GameHistoryText.text += "\t\t\t\tHighscore:" + snapshot.Child(user.UserId).Child("highScore").Value.ToString();
-					GameHistoryText.text += "\n\n";
-					GameHistoryText.text += "\t\tDate\t\t\t\t\t\tReps\t\t\tScore\n";
-
-
-					foreach(DataSnapshot item in snapshot.Child(user.UserId).Child("games").Children)
-					{
-						// do something with entry.Value or entry.Key
-//						print(item.Child("date").Value);
-
-
-						string date = item.Child("date").Value.ToString();
-						string repCount = item.Child("repCount").Value.ToString();	
-						string score = item.Child("score").Value.ToString();
-
-						GameHistoryText.text += date + "\t\t\t   " + repCount + "\t\t\t" + score+ "\n";
-
-					}
-
+					setHighScore (snapshot);
+					setHeader ();
+					setAllGameData (snapshot);
 				}
 			});
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
+	void setHighScore (DataSnapshot snapshot)
+	{
+		GameHistoryText.text += "\t\t\t\tHighscore:" + snapshot.Child (user.UserId).Child ("highScore").Value.ToString ();
+	}
 
+	void setHeader ()
+	{
+		GameHistoryText.text += "\n\n";
+		GameHistoryText.text += "\t\tDate\t\t\t\t\t\tReps\t\t\tScore\n";
+	}
 
+	void setAllGameData (DataSnapshot snapshot)
+	{
+		foreach (DataSnapshot game in snapshot.Child (user.UserId).Child ("games").Children) {
+			string date = game.Child ("date").Value.ToString ();
+			string repCount = game.Child ("repCount").Value.ToString ();
+			string score = game.Child ("score").Value.ToString ();
+			GameHistoryText.text += date + "\t\t\t   " + repCount + "\t\t\t" + score + "\n";
+		}
 	}
 }
