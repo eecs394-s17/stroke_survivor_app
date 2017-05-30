@@ -10,60 +10,45 @@ using Firebase.Database;
 using Firebase.Unity.Editor;
 using Firebase.Auth;
 
-public class User {
-	public string uID;
+public class GameData {
 	public int repCount;
 	public string date;
 	public int score;
-	public User() {
+	public GameData() {
+		this.repCount = 0; 
+		this.score = 0;
 	}
 
-	public User(string userID) {
-		this.uID = userID;
-		this.repCount = 0; 
-	}
 }
 	
 public class GameManager : MonoBehaviour {
 	public Text timer;
 	public float timeLeft; 
-	private bool isGameOver = false;
+	private bool gameOver = false;
 	private Movement m_movement;
 	public GameObject m_ballInstance;
 	public Text gameOverRepCountText;
 	public Text inGameRepCountText;
 	public Text heightScoreText;
 	public Canvas GameOverScreen;
-	private bool dataSent = false;
 	public Button easyButton;
 	public Button mediumButton;
 	public Button hardButton;
 	public Canvas difficultyScreen;
 	public static bool gameStarted = false;
-	public int currHighScore;
-
+	public int userHighScore;
 	private int currGameScore;
 	Firebase.Auth.FirebaseAuth auth;
-	Firebase.Auth.FirebaseUser user;
-
-
-
+	Firebase.Auth.FirebaseUser firebUser;
 
 
 	// Use this for initialization
 	void Start () {
-		InitializeFirebase();
-		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
-		difficultyScreen.gameObject.SetActive (true);
-		GameOverScreen.gameObject.SetActive (false);
-		m_ballInstance = GameObject.Find ("BallSprite");
-		m_movement = m_ballInstance.GetComponent<Movement> ();
-		easyButton.onClick.AddListener(easyClick);
-		mediumButton.onClick.AddListener(mediumClick);
-		hardButton.onClick.AddListener(hardClick);
-		setCurrentHighScore ();
-
-
+		initializeFirebase();
+		initializeScreens ();
+		initializeMovementScript ();
+		initializeDifficultyButtons ();
+		setUserHighScoreFromPreviousGames (); 
 	}
 	
 	// Update is called once per frame
@@ -72,23 +57,35 @@ public class GameManager : MonoBehaviour {
 			currGameScore = m_movement.planksJumped;
 			timeLeft -= UnityEngine.Time.deltaTime;
 			UpdateAllGameTextsDisplayed ();
-
-			if (timeLeft < 0) {
-				timeLeft = 0;
-				isGameOver = true;
+			this.gameOver = isGameOver ();
+			if (this.gameOver) {
+				disableBallMovement ();
+				setGameOverText ();
+				enableGameOverScreen ();
+				resetGameData ();
+				resetGameSettings ();
+				sendGameDataToFirebase ();
 			}
-
-
-			if (this.isGameOver) {
-				enableGameOverScreen (); 
-				resetGame ();
-			}
-			if (!this.dataSent) {
-				sendDataToFirebase ();
-			}
-
 		}
+	}
 
+	void initializeScreens ()
+	{
+		difficultyScreen.gameObject.SetActive (true);
+		GameOverScreen.gameObject.SetActive (false);
+	}
+
+	void initializeMovementScript ()
+	{
+		m_ballInstance = GameObject.Find ("BallSprite");
+		m_movement = m_ballInstance.GetComponent<Movement> ();
+	}
+
+	void initializeDifficultyButtons ()
+	{
+		easyButton.onClick.AddListener (easyClick);
+		mediumButton.onClick.AddListener (mediumClick);
+		hardButton.onClick.AddListener (hardClick);
 	}
 
 	void UpdateAllGameTextsDisplayed ()
@@ -110,80 +107,49 @@ public class GameManager : MonoBehaviour {
 	void setRepCountText() {
 		inGameRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
 	}
-		
+
+	bool isGameOver ()
+	{
+		if (timeLeft < 0) {
+			timeLeft = 0; // if timeLeft is negative, reset it to 0
+			return true;
+		} 
+		else {
+			return false;
+		}
+	}		
 
 	void enableGameOverScreen ()
 	{
-		gameOverRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
-		gameOverRepCountText.text += "\n Height Score: " + currGameScore.ToString ();
 		GameOverScreen.gameObject.SetActive (true);
-		m_movement.enabled = false;
-
 	}
 
-	void resetGame ()
+	void disableBallMovement()
 	{
-		isGameOver = false;
+		m_movement.enabled = false;
+	}
+
+	void setGameOverText ()
+	{
+		gameOverRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
+		gameOverRepCountText.text += "\n Height Score: " + currGameScore.ToString ();
+	}
+		
+	void resetGameSettings()
+	{
+		this.gameOver = false;
 		GameManager.gameStarted = false;
+	}
+
+	void resetGameData ()
+	{
 		m_movement.planksJumped = 0;
 		m_movement.plankCount = 0;
 	}
 
-	void sendDataToFirebase ()
-	{
-		this.dataSent = true;
-		print ("entering firebase");
-		// Set up the Editor before calling into the realtime database.
-//		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
-		// Get the root reference location of the database.
-		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
 
-		User currUser = new User (user.UserId);
-		currUser.repCount = m_movement.repCounter;
-		currUser.date = System.DateTime.Now.ToString ("yyyy/MM/dd HH:mm:ss");
-		currUser.score = currGameScore;
-
-		string json = JsonUtility.ToJson (currUser);
-		int newHighScore = currHighScore;
-		print ("current highest score: " + currHighScore);
-		print ("current game high score: " + currGameScore);
-		if (currGameScore > newHighScore) {
-			newHighScore = currGameScore;
-		}
-		print ("new high score: " + newHighScore);
-			
-
-		Debug.LogFormat("curr user id: {0}",currUser.uID);
-		reference.Child ("users").Child (currUser.uID).Child ("games").Push().SetRawJsonValueAsync(json);
-		//reference.Child("users").Child(currUser.uID).Child("games").SetRawJsonValueAsync(json);
-		reference.Child ("users").Child (currUser.uID).Child ("highScore").SetValueAsync (newHighScore);;
-		//reference.Child ("users").Push ().SetRawJsonValueAsync (json);
-	}
-	// sets the class variable to the user's current highest score from all games played
-	void setCurrentHighScore()
-	{
+	void initializeFirebase() {
 		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
-		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-
-		FirebaseDatabase.DefaultInstance
-			.GetReference("users").
-			GetValueAsync().ContinueWith(task => {
-				if (task.IsFaulted) {
-					// Handle the error...
-					print("ERROR GETTING HIGH SCORE");
-				}
-				else if (task.IsCompleted) {
-					DataSnapshot snapshot = task.Result;
-					//print(snapshot.Child("YLQHehbNvUUwyzlYo4Hy6tjtQIx2").Child("highScore").GetValue().ToString());
-					//highScore = ((int)snapshot.Child("YLQHehbNvUUwyzlYo4Hy6tjtQIx2").Child("games").Child("highScore").GetValue(true));
-					currHighScore =int.Parse(snapshot.Child(user.UserId).Child("highScore").GetRawJsonValue());
-				}
-			});
-
-	}
-
-	void InitializeFirebase() {
-		Debug.Log("Setting up Firebase Auth plankgame");
 		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 		auth.StateChanged += AuthStateChanged;
 		AuthStateChanged(this, null);
@@ -192,19 +158,67 @@ public class GameManager : MonoBehaviour {
 
 	// Track state changes of the auth object.
 	void AuthStateChanged(object sender, System.EventArgs eventArgs) {	
-		if (auth.CurrentUser != user) {
-			bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null;
-			if (!signedIn && user != null) {
-				Debug.Log("Signed out plankgame" + user.UserId);
+		if (auth.CurrentUser != firebUser) {
+			bool signedIn = firebUser != auth.CurrentUser && auth.CurrentUser != null;
+			if (!signedIn && firebUser != null) {
+				Debug.Log("Signed out plankgame" + firebUser.UserId);
 			}
-			user = auth.CurrentUser;
+			firebUser = auth.CurrentUser;
 			if (signedIn) {
-				Debug.Log("Signed in plankgame " + user.UserId);
+				Debug.Log("Signed in plankgame " + firebUser.UserId);
 			}
-			print ("done");
-
 		}
 	}
+
+	void sendGameDataToFirebase ()
+	{
+		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+		string gameDataJson = getCurentGameDataAsJson ();
+		int newHighScore = getUpdatedHighScore ();
+		Debug.LogFormat("sending data for uID: {0}",firebUser.UserId);
+		reference.Child ("users").Child (firebUser.UserId).Child ("games").Push().SetRawJsonValueAsync(gameDataJson);
+		reference.Child ("users").Child (firebUser.UserId).Child ("highScore").SetValueAsync (newHighScore);;
+
+	}
+
+	string getCurentGameDataAsJson()
+	{
+		GameData currGameData = new GameData ();
+		currGameData.repCount = m_movement.repCounter;
+		currGameData.date = System.DateTime.Now.ToString ("yyyy/MM/dd HH:mm:ss");
+		currGameData.score = currGameScore;
+		string json = JsonUtility.ToJson (currGameData);
+		Debug.LogFormat ("gameData: {0}", json);
+		return json;
+	}
+	// returns the higher number between the current game score vs the high score from all past games
+	int getUpdatedHighScore()
+	{
+		if (currGameScore > userHighScore) {
+			return currGameScore;
+		} 
+		else {
+			return userHighScore;
+		}
+	}
+	// sets the class variable to the user's current highest score from all games played
+	void setUserHighScoreFromPreviousGames()
+	{
+		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+		FirebaseDatabase.DefaultInstance
+			.GetReference("users").
+			GetValueAsync().ContinueWith(task => {
+				if (task.IsFaulted) {
+					Debug.Log("ERROR GETTING HIGH SCORE");
+				}
+				else if (task.IsCompleted) {
+					DataSnapshot snapshot = task.Result;
+					userHighScore =int.Parse(snapshot.Child(firebUser.UserId).Child("highScore").GetRawJsonValue());
+				}
+			});
+
+	}
+
 
 	void easyClick()
 	{
