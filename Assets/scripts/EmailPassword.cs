@@ -36,7 +36,7 @@ public class EmailPassword : MonoBehaviour
 			}
 			user = auth.CurrentUser;
 			if (signedIn) {
-				print("Signed in " + user.UserId); // UserID is the email (important!!!)
+				print("Signed in " + user.UserId); // UserID is the email in Unity Player, uID on phone
 				displayName = user.UserId;
 				print ("display name is " + user.UserId);
 			}
@@ -46,22 +46,12 @@ public class EmailPassword : MonoBehaviour
 	void Start()
 	{
 		InitializeFirebase ();
-//		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-		print("Entered login.");
-		//		UserNameInput.text = "demofirebase@gmail.com";
-		//		PasswordInput.text = "abcdefgh";
-		print ("entered username input and password input");
 		SignupButton.onClick.AddListener(() => Signup(UserNameInput.text, PasswordInput.text));
 		LoginButton.onClick.AddListener(() => Login(UserNameInput.text, PasswordInput.text));
-
-		//
-		//		SignupButton.onClick.AddListener(() => Signup(UserNameInput.text, PasswordInput.text));
-		//		LoginButton.onClick.AddListener(() => Login(UserNameInput.text, PasswordInput.text));
 	}
 
 	public void Signup(string email, string password)
 	{
-		print ("entered signup");
 		if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
 		{
 			print ("bad request signup");
@@ -69,7 +59,6 @@ public class EmailPassword : MonoBehaviour
 		}
 
 		auth.CreateUserWithEmailAndPasswordAsync(UserNameInput.text, PasswordInput.text).ContinueWith(task => {
-			print("creating user");
 			if (task.IsCanceled) {
 				Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
 				return;
@@ -78,7 +67,6 @@ public class EmailPassword : MonoBehaviour
 				Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
 				return;
 			}
-			// Firebase user has been created.
 			Firebase.Auth.FirebaseUser newUser = task.Result;
 			Debug.LogFormat("Firebase user created successfully: {0} ({1})",
 				newUser.DisplayName, newUser.UserId);
@@ -87,7 +75,6 @@ public class EmailPassword : MonoBehaviour
 
 	public void Login(string email, string password)
 	{
-		print ("login called1");
 		auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
 			{
 				print("in auth");
@@ -103,11 +90,9 @@ public class EmailPassword : MonoBehaviour
 						UpdateErrorMessage(task.Exception.InnerExceptions[0].Message);
 					return;
 				}
-
 				FirebaseUser user = task.Result;
 				Debug.LogFormat("User signed in successfully: {0} ({1})",
 					user.DisplayName, user.UserId);
-
 				PlayerPrefs.SetString("LoginUser", user != null ? user.Email : "Unknown");
 				SceneManager.LoadScene("MainMenu");
 			});
