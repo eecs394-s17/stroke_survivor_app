@@ -10,32 +10,23 @@ using Firebase.Database;
 using Firebase.Unity.Editor;
 using Firebase.Auth;
 
-public class CustomUser {
+public class User {
 	public string uID;
 	public int repCount;
 	public string date;
 	public int score;
-	public CustomUser() {
+	public User() {
 	}
 
-	public CustomUser(string userID) {
+	public User(string userID) {
 		this.uID = userID;
 		this.repCount = 0; 
 	}
 }
-
-public class Score {
-	public string highScore;
-
-	public Score(string score)
-	{
-		this.highScore = score;
-	}
-}
-
+	
 public class GameManager : MonoBehaviour {
 	public Text timer;
-	public float timeLeft; // time in seconds left before game over
+	public float timeLeft; 
 	private bool isGameOver = false;
 	private Movement m_movement;
 	public GameObject m_ballInstance;
@@ -51,7 +42,7 @@ public class GameManager : MonoBehaviour {
 	public static bool gameStarted = false;
 	public int currHighScore;
 
-	private int currGameScore = Movement.plankCount-2;
+	private int currGameScore;
 	Firebase.Auth.FirebaseAuth auth;
 	Firebase.Auth.FirebaseUser user;
 
@@ -63,13 +54,10 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		InitializeFirebase();
 		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://strokesurvivors-605a1.firebaseio.com/");
-
-
 		difficultyScreen.gameObject.SetActive (true);
 		GameOverScreen.gameObject.SetActive (false);
 		m_ballInstance = GameObject.Find ("BallSprite");
 		m_movement = m_ballInstance.GetComponent<Movement> ();
-		setRepCountText ();
 		easyButton.onClick.AddListener(easyClick);
 		mediumButton.onClick.AddListener(mediumClick);
 		hardButton.onClick.AddListener(hardClick);
@@ -80,14 +68,10 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		currGameScore = Movement.plankCount - 2;
 		if (GameManager.gameStarted) {
-			setRepCountText ();
-
+			currGameScore = m_movement.planksJumped;
 			timeLeft -= UnityEngine.Time.deltaTime;
-			this.timer.text = "" + Mathf.Round (timeLeft);
-			this.heightScoreText.text = currGameScore.ToString (); // plank count starts from 2 because 2 planks are initially initialized
-			//print (timeLeft.ToString ());
+			UpdateAllGameTextsDisplayed ();
 
 			if (timeLeft < 0) {
 				timeLeft = 0;
@@ -95,37 +79,57 @@ public class GameManager : MonoBehaviour {
 			}
 
 
-			if (this.isGameOver && !this.dataSent) {
+			if (this.isGameOver) {
 				enableGameOverScreen (); 
-				this.isGameOver = false;
-				postDataToFirebase ();
-
+				resetGame ();
+			}
+			if (!this.dataSent) {
+				sendDataToFirebase ();
 			}
 
 		}
 
-
-
-
 	}
 
+	void UpdateAllGameTextsDisplayed ()
+	{
+		setRepCountText ();
+		setTimerText ();
+		setScoreCountText ();
+	}
+
+	void setTimerText ()
+	{
+		this.timer.text = "Time Left: " + Mathf.Round (timeLeft);
+	}
+
+	void setScoreCountText() {
+		heightScoreText.text = "Height Score: " +currGameScore.ToString ();
+	}
 
 	void setRepCountText() {
-//		print (m_movement.repCounter);
 		inGameRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
 	}
+		
 
 	void enableGameOverScreen ()
 	{
 		gameOverRepCountText.text = "Rep Count: " + m_movement.repCounter.ToString ();
-		gameOverRepCountText.text += "\n Height Score: " + (Movement.plankCount - 2).ToString ();
+		gameOverRepCountText.text += "\n Height Score: " + currGameScore.ToString ();
 		GameOverScreen.gameObject.SetActive (true);
 		m_movement.enabled = false;
-		GameManager.gameStarted = false;
-		Movement.plankCount = 0; // reset height score
+
 	}
 
-	void postDataToFirebase ()
+	void resetGame ()
+	{
+		isGameOver = false;
+		GameManager.gameStarted = false;
+		m_movement.planksJumped = 0;
+		m_movement.plankCount = 0;
+	}
+
+	void sendDataToFirebase ()
 	{
 		this.dataSent = true;
 		print ("entering firebase");
@@ -134,7 +138,7 @@ public class GameManager : MonoBehaviour {
 		// Get the root reference location of the database.
 		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
 
-		CustomUser currUser = new CustomUser (user.UserId);
+		User currUser = new User (user.UserId);
 		currUser.repCount = m_movement.repCounter;
 		currUser.date = System.DateTime.Now.ToString ("yyyy/MM/dd HH:mm:ss");
 		currUser.score = currGameScore;
@@ -220,7 +224,7 @@ public class GameManager : MonoBehaviour {
 
 	void hardClick()
 	{
-		this.timeLeft = 180f;
+		this.timeLeft = 5f;
 		m_movement.m_speed = 9f;
 		difficultyScreen.gameObject.SetActive (false);
 		GameManager.gameStarted = true;
