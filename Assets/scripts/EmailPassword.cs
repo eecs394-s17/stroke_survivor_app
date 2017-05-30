@@ -28,17 +28,15 @@ public class EmailPassword : MonoBehaviour
 	}
 
 	public void AuthStateChanged(object sender, System.EventArgs eventArgs) {
-		print("current user is " + auth.CurrentUser);
 		if (auth.CurrentUser != user) {
 			bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null;
 			if (!signedIn && user != null) {
-				print("Signed out " + user.UserId);
+				Debug.Log("Signed out " + user.UserId);
 			}
 			user = auth.CurrentUser;
 			if (signedIn) {
-				print("Signed in " + user.UserId); // UserID is the email in Unity Player, uID on phone
+				Debug.Log("Signed in " + user.UserId); // UserID is the email in Unity Player, uID on phone
 				displayName = user.UserId;
-				print ("display name is " + user.UserId);
 			}
 		}
 	}
@@ -54,7 +52,7 @@ public class EmailPassword : MonoBehaviour
 	{
 		if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
 		{
-			print ("bad request signup");
+			Debug.Log("bad request signup");
 			return;
 		}
 
@@ -77,7 +75,6 @@ public class EmailPassword : MonoBehaviour
 	{
 		auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
 			{
-				print("in auth");
 				if (task.IsCanceled)
 				{
 					Debug.LogError("SignInWithEmailAndPasswordAsync canceled.");

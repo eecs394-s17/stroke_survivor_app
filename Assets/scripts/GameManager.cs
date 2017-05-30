@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
 	public Button easyButton;
 	public Button mediumButton;
 	public Button hardButton;
+	public Button quitButton;
 	public Canvas difficultyScreen;
 	public static bool gameStarted = false;
 	public int userHighScore;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour {
 		initializeFirebase();
 		initializeScreens ();
 		initializeMovementScript ();
-		initializeDifficultyButtons ();
+		initializeButtons ();
 		setUserHighScoreFromPreviousGames (); 
 	}
 	
@@ -81,11 +82,12 @@ public class GameManager : MonoBehaviour {
 		m_movement = m_ballInstance.GetComponent<Movement> ();
 	}
 
-	void initializeDifficultyButtons ()
+	void initializeButtons ()
 	{
 		easyButton.onClick.AddListener (easyClick);
 		mediumButton.onClick.AddListener (mediumClick);
 		hardButton.onClick.AddListener (hardClick);
+		quitButton.onClick.AddListener (quitClick);
 	}
 
 	void UpdateAllGameTextsDisplayed ()
@@ -238,9 +240,15 @@ public class GameManager : MonoBehaviour {
 
 	void hardClick()
 	{
-		this.timeLeft = 5f;
+		this.timeLeft = 15f;
 		m_movement.m_speed = 9f;
 		difficultyScreen.gameObject.SetActive (false);
 		GameManager.gameStarted = true;
+	}
+
+	void quitClick()
+	{
+		resetGameData ();
+		resetGameSettings ();
 	}
 }
