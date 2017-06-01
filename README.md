@@ -1,5 +1,22 @@
 # Unity Stroke Game
 
+## SYSTEM REQUIREMENTS
+
+- Unity 5.6 (or higher)
+- MacOS, Windows
+- Xcode v8.3.2 or higher (only needed if deploying to iphone)
+
+## Installation
+
+* Clone the Repo in a directory of your choosing
+```bash
+$  git clone https://github.com/eecs394-s17/stroke_survivor_app.git
+```
+
+* Open Unity
+
+
+
 ## Quickstart
 * Open up Unity
 
