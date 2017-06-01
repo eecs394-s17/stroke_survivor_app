@@ -61,7 +61,7 @@ Step 2) https://drive.google.com/file/d/0BxlX8gnBsVrcTHJROUl3UWZseWs/view?usp=sh
 * Firebase has a Unity SDK and has very good documentation.
 https://firebase.google.com/docs/database/unity/start
 
-* If you would like access to Stroke Survivor's firebase console, please email chankyuoh2018@u.northwestern.edu
+* If you would like access to Stroke Survivor's firebase console, please email chankyuoh2018@u.northwestern.edu with the email you would like access for
 
 ## Debugging on mobile
 https://www.assetstore.unity3d.com/en/#!/content/12047
