@@ -1,6 +1,6 @@
-# Unity Stroke Game
+# Stroke Survivors
 
-## SYSTEM REQUIREMENTS
+## System Requirements
 
 - Unity 5.6 (or higher)
 - MacOS, Windows
@@ -25,7 +25,7 @@ $  git clone https://github.com/eecs394-s17/stroke_survivor_app.git
 
 * Go to Build Settings (File->Build Settings) 
 
-![alt text](http://imgur.com/a/bncre)
+![Screenshot]\(http://imgur.com/a/bncre) 
 
 Use the regular Android build & run; will be asked to setup Android SDK. Download Android SDK as instructed, replace the sdk/tools folder with the following download:
 Windows: https://dl.google.com/android/repository/tools_r25.2.3-windows.zip -
