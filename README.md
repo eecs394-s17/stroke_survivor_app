@@ -13,20 +13,20 @@
 $  git clone https://github.com/eecs394-s17/stroke_survivor_app.git
 ```
 
+## Quickstart
+
 * Open Unity
 
+* Click Open in the top right corner, and find and open the directory stroke_survivor_app
 
-
-## Quickstart
-* Open up Unity
-
-* Click Open
-
-* Find the UnityStrokeGame' directory, and click Open
-## Run
-* Press the Play Button
+* Press the Play Button at the top of the screen
 
 ## Setup Instructions for Android Deployment
+
+* Go to Build Settings (File->Build Settings) 
+
+![alt text](http://imgur.com/a/bncre)
+
 Use the regular Android build & run; will be asked to setup Android SDK. Download Android SDK as instructed, replace the sdk/tools folder with the following download:
 Windows: https://dl.google.com/android/repository/tools_r25.2.3-windows.zip -
 
