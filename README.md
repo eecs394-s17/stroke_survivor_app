@@ -71,3 +71,12 @@ https://www.assetstore.unity3d.com/en/#!/content/12047
 * After you deployed the app to your phone, draw a circle on the screen, and the debug console will appear, where all console messages will be logged
 
 * If you have any trouble with this tool, please consult the tool's README
+
+
+
+## Known bugs not fixed
+
+* In the dashboard screen, users cannot scroll down to see more of the games played
+
+* On Android devices, screen will timeout during the game, as gameplay doesn't require user to touch the phone.
+
