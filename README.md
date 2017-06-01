@@ -4,7 +4,7 @@
 
 - Unity 5.6 (or higher)
 - MacOS, Windows
-- Xcode v8.3.2 or higher (only needed if deploying to iphone)
+- Xcode 7 or higher (only needed if deploying to iphone)
 - Android SDK (only needed if deploying to Android, see setup instructions for Android Deployment)
 
 ## Installation
