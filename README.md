@@ -25,8 +25,7 @@ $  git clone https://github.com/eecs394-s17/stroke_survivor_app.git
 
 * Go to Build Settings (File->Build Settings) 
 
-![Screenshot]\(http://imgur.com/j9tJQSu) 
-![Image of Yaktocat](http://imgur.com/j9tJQSu)
+![build_settings](http://i.imgur.com/j9tJQSu.png)
 
 Use the regular Android build & run; will be asked to setup Android SDK. Download Android SDK as instructed, replace the sdk/tools folder with the following download:
 Windows: https://dl.google.com/android/repository/tools_r25.2.3-windows.zip -
