@@ -7,6 +7,12 @@
 - Xcode 7 or higher (only needed if deploying to iphone)
 - Android SDK (only needed if deploying to Android, see setup instructions for Android Deployment)
 
+## Sample of Code
+
+There is no code for the UI (it is built using the Unity GUI); a portion of the script can be found here:
+https://drive.google.com/file/d/0BxlX8gnBsVrcQkNIam9kRnZnOUE/view?usp=sharing
+
+
 ## Installation
 
 * Clone the Repo in a directory of your choosing
