@@ -72,7 +72,7 @@ For an example of how the API has been applied to use Firebase functions based o
 
 https://github.com/eecs394-s17/stroke_survivor_app/blob/master/Assets/scripts/GameManager.cs
 
-* If you would like access to Stroke Survivor's firebase console, please email chankyuoh2018@u.northwestern.edu with the email you would like access for
+* If you would like access to Stroke Survivor's firebase console, please email chankyuoh2018@u.northwestern.edu with the non-Northwestern google email you would like access for (Northwestern emails don't have access to Firebase)
 
 ## Debugging on mobile
 https://www.assetstore.unity3d.com/en/#!/content/12047
